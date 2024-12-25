@@ -81,23 +81,14 @@ public class Report implements Serializable {
     }
 
     private void calculateEveryThing() throws Exception {
+        SalaryInfoDB salaryInfoDB = new SalaryInfoDB();
         OrderDB orderdb = new OrderDB();
         ReceiveNoteDB receivenotedb = new ReceiveNoteDB();
-        SalaryInfoDB salaryInfoDB = new SalaryInfoDB();
+        
         ArrayList<SalaryInfo> salaryInfo = salaryInfoDB.getByPeriod(this.startDate,this.endDate);
-
-//        ArrayList<Order> orderList = orderdb.getByPeriod(this.startDate, this.endDate);
-        ArrayList<Order> orderList = orderdb.getAllOrders();
+        ArrayList<Order> orderList = orderdb.getByPeriod(this.startDate, this.endDate);
         ArrayList<ReceiveNote> receivenoteList = receivenotedb.getByPeriod(this.startDate, this.endDate);
 
-        ArrayList<Order> res = new ArrayList<Order>();
-        for(Order e : orderList) {
-            if((e.getOrderDate().isEqual(startDate) || e.getOrderDate().isAfter(startDate)) && (e.getOrderDate().isEqual(endDate) || e.getOrderDate().isBefore(endDate))) {
-                res.add(e);
-            }
-        }
-
-//        System.out.println(res.size());
         double tmprevenue = 0;
         double tmpcosts = 0;
         double tmpsalary = 0;
@@ -117,24 +108,21 @@ public class Report implements Serializable {
 
         this.revenue = tmprevenue;
         this.costs = (tmpcosts + tmpsalary);
-        double tmpprofit = tmprevenue - this.costs;
+        double tmpprofit = this.revenue - this.costs;
         this.profit = tmpprofit;
 
-        for(ReceiveNote r : Login.admin.getAllReceiveNotes()){
-            this.receiveProductInfos.add(r.getReceiveProductInfo());
+        this.receiveProductInfos = new ArrayList<>();
+        this.ordersProductInfo = new ArrayList<>();
+
+        for(ReceiveNote rn : receivenoteList){
+            this.receiveProductInfos.add(rn.getReceiveProductInfo());
         }
 
-        System.out.println(orderList.size());
         for(Order o : orderList){
-            System.out.println(o.getProductInfoList());
-
             ArrayList<ProductInfo> productInfoArrayList = o.getProductInfoList();
-
             for (ProductInfo p : productInfoArrayList){
-                ordersProductInfo.add(p);
-                System.out.println(p.getProduct().getDetails());
+                this.ordersProductInfo.add(p);
             }
         }
-
     }
 }

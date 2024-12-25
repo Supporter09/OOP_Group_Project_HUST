@@ -169,6 +169,7 @@ public class statistic implements Initializable {
                     Integer.parseInt(toYear.getValue()),
                     Integer.parseInt(toMonth.getValue())
             );
+            System.out.println(endYearMonth);
             int endDay = Integer.parseInt(toDate.getValue());
             LocalDate endDate = endYearMonth.atDay(endDay);
 
