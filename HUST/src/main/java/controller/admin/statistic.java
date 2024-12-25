@@ -156,6 +156,8 @@ public class statistic implements Initializable {
     }
 
     public void handleExtractButton(ActionEvent event) throws Exception {
+        tableIn.getItems().clear();
+        tableOut.getItems().clear();
         try{
             YearMonth startYearMonth = YearMonth.of(
                     Integer.parseInt(fromYear.getValue()),
