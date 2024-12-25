@@ -78,10 +78,6 @@ public class Login {
 
         }
     }
-
-
-
-
     public void handleRegisterButton(ActionEvent event) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/Register.fxml"));
         Parent root = fxmlLoader.load();
@@ -91,7 +87,8 @@ public class Login {
         dialogStage.show();
     }
 
-    public void handleGuestButton(ActionEvent event) throws IOException {
+    public void handleGuestButton(ActionEvent event) throws Exception {
+        customer = new Customer("Guest", "bcm siu gay");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
