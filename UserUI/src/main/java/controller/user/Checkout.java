@@ -71,12 +71,20 @@ public class Checkout implements Initializable {
             totalPriceLabel.setText("0.00$");
         }
         try {
-            ArrayList<ProductInfo> allProducts = Login.customer.getCart().getItemsInCart();
-            table.refresh();
-            ProductObservableList.addAll(allProducts);
-            updateTotalPriceLabel();
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            if (Login.customer != null && Login.customer.getCart() != null) {
+                ArrayList<ProductInfo> allProducts = Login.customer.getCart().getItemsInCart();
+
+                if (allProducts.isEmpty()) {
+                    // Optionally show that the cart is empty
+                    System.out.println("Cart is empty.");
+                } else {
+                    ProductObservableList.addAll(allProducts);
+                    updateTotalPriceLabel();
+                    table.refresh();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         ProductID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProduct().getProductID()).asObject());
@@ -123,53 +131,52 @@ public class Checkout implements Initializable {
 
     @FXML
     public int handleOrderButton(ActionEvent event) throws Exception {
-            String selectedPaymentMethod = PaymentMethods.getValue(); // Get selected value
+        String selectedPaymentMethod = PaymentMethods.getValue(); // Get selected value
 
-            if (selectedPaymentMethod == null || selectedPaymentMethod.isEmpty()) {
-                // Show an error if no payment method is selected
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Payment Method Required");
-                alert.setHeaderText("No Payment Method Selected");
-                alert.setContentText("Please select a payment method before placing your order.");
-                alert.showAndWait();
-            } else {
-                // Proceed with the order
-                Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                successAlert.setTitle("Order Placed");
-                successAlert.setHeaderText("Are you sure to place an order");
-                Optional<ButtonType> result = successAlert.showAndWait();
-                Alert confirmalert = new Alert(Alert.AlertType.INFORMATION);
-                confirmalert.setTitle("Order Placed");
-                confirmalert.setHeaderText("Order Placed Successfully");
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    confirmalert.setContentText("Your order has been placed successfully using: " + selectedPaymentMethod);
-                    confirmalert.showAndWait();
-                    processOrder(selectedPaymentMethod);
-                }
-
-
-
+        if (selectedPaymentMethod == null || selectedPaymentMethod.isEmpty()) {
+            // Show an error if no payment method is selected
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Payment Method Required");
+            alert.setHeaderText("No Payment Method Selected");
+            alert.setContentText("Please select a payment method before placing your order.");
+            alert.showAndWait();
+        } else {
+            // Proceed with the order
+            Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            successAlert.setTitle("Order Placed");
+            successAlert.setHeaderText("Are you sure to place an order");
+            Optional<ButtonType> result = successAlert.showAndWait();
+            Alert confirmalert = new Alert(Alert.AlertType.INFORMATION);
+            confirmalert.setTitle("Order Placed");
+            confirmalert.setHeaderText("Order Placed Successfully");
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                confirmalert.setContentText("Your order has been placed successfully using: " + selectedPaymentMethod);
+                confirmalert.showAndWait();
+                processOrder(selectedPaymentMethod);
             }
+
+
+
+        }
         return 0;
     }
 
-        private void processOrder(String paymentMethod) throws Exception {
-            for (ProductInfo x: Login.customer.getCart().getItemsInCart()){
-                Store.removeProduct(x.getProduct(), x.getQuantity());
-                ProductObservableList.removeIf(productInfo -> productInfo.getQuantity() <= 0);
-                table.refresh();//{
-            }
-            // Clear the observable list to remove items from the table
-            ProductObservableList.clear();
-            Login.customer.getCart().getItemsInCart().clear();
-            // Refresh the table view to reflect changes
-            table.refresh();
-
-            // Update the total price label
-            updateTotalPriceLabel();
-                // Logic to handle the order based on the selected payment method
-            System.out.println("Processing order with payment method: " + paymentMethod);
+    private void processOrder(String paymentMethod) throws Exception {
+        for (ProductInfo x: Login.customer.getCart().getItemsInCart()){
+            Store.removeProduct(x.getProduct(), x.getQuantity());
+            ProductObservableList.removeIf(productInfo -> productInfo.getQuantity() <= 0);
+            table.refresh();//{
         }
+        // Clear the observable list to remove items from the table
+        ProductObservableList.clear();
+        Login.customer.getCart().getItemsInCart().clear();
+        // Refresh the table view to reflect changes
+        table.refresh();
+        // Update the total price label
+        updateTotalPriceLabel();
+        // Logic to handle the order based on the selected payment method
+        System.out.println("Processing order with payment method: " + paymentMethod);
+    }
     private void updateTotalPriceLabel() {
         double totalPrice = 0.0;
 
