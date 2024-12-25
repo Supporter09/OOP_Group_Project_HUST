@@ -20,6 +20,7 @@ public class SalaryInfo implements Serializable {
         this.createdAt = LocalDate.now();
     }
 
+
     public SalaryInfo(ArrayList<Staff> staffList, LocalDate createdAt) {
         this.staffList = staffList;
         this.createdAt = createdAt;

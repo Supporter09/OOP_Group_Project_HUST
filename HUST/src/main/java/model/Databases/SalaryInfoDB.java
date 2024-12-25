@@ -4,6 +4,7 @@ import model.SalaryInfo.SalaryInfo;
 import model.exception.DatabaseNotAvailableException;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SalaryInfoDB {
@@ -75,4 +76,20 @@ public class SalaryInfoDB {
         this.db.clear(); // Clear the in-memory list
         save(); // Save the empty list to the file
     }
+
+    public ArrayList<SalaryInfo> getByPeriod(LocalDate startDate, LocalDate endDate) throws Exception {
+        if (!available) {
+            throw new DatabaseNotAvailableException("Database is not available");
+        }
+        ArrayList<SalaryInfo> res = new ArrayList<>();
+        for (SalaryInfo salaryInfo : this.db) {
+            if ((salaryInfo.getCreatedAt().isEqual(startDate) || salaryInfo.getCreatedAt().isAfter(startDate)) &&
+                    (salaryInfo.getCreatedAt().isEqual(endDate) || salaryInfo.getCreatedAt().isBefore(endDate))) {
+                res.add(salaryInfo);
+            }
+        }
+        return res;
+    }
+
+
 }

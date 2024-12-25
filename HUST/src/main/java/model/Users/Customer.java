@@ -93,6 +93,7 @@ public class Customer extends User {
         }
         if(check)
         {
+            System.out.println("True order");
             Order order = new Order(this, this.getCart().getItemsInCart());
             order.print();
             for(ProductInfo pq: this.cart.getItemsInCart())
@@ -105,7 +106,7 @@ public class Customer extends User {
             return order;
         }
         else
-        {
+        {   System.out.println("False order");
             System.err.println(ANSI_RED + errstr + ANSI_RESET);
             return null;
         }

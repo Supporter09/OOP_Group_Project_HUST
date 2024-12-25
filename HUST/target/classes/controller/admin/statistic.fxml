@@ -165,7 +165,7 @@
                         </AnchorPane>
                         <TableView fx:id="tableIn" prefHeight="247.0" prefWidth="956.0" tableMenuButtonVisible="true" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn prefWidth="54.933349609375" text="ID" />
+                            <TableColumn fx:id="idIn" prefWidth="54.933349609375" text="ID" />
                             <TableColumn fx:id="nameIn" prefWidth="408.2667236328125" text="Name" />
                               <TableColumn fx:id="quantityIn" prefWidth="85.33331298828125" text="Quantity" />
                               <TableColumn fx:id="priceIn" prefWidth="202.400146484375" text="Price" />

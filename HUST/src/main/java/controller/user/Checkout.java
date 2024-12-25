@@ -154,13 +154,14 @@ public class Checkout implements Initializable {
 
         private void processOrder(String paymentMethod) throws Exception {
             for (ProductInfo x: Login.customer.getCart().getItemsInCart()){
-                Store.removeProduct(x.getProduct(), x.getQuantity());
+//                Store.removeProduct(x.getProduct(), x.getQuantity());
                 ProductObservableList.removeIf(productInfo -> productInfo.getQuantity() <= 0);
                 table.refresh();//{
             }
             // Clear the observable list to remove items from the table
             ProductObservableList.clear();
-            Login.customer.getCart().getItemsInCart().clear();
+            Login.customer.pay();
+//            Login.customer.getCart().getItemsInCart().clear();
             // Refresh the table view to reflect changes
             table.refresh();
 
@@ -169,6 +170,7 @@ public class Checkout implements Initializable {
                 // Logic to handle the order based on the selected payment method
             System.out.println("Processing order with payment method: " + paymentMethod);
         }
+
     private void updateTotalPriceLabel() {
         double totalPrice = 0.0;
 

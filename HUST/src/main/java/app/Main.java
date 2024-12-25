@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Databases.OrderDB;
 import model.Databases.UserDB;
 import model.Products.Book;
 import model.Products.Product;
@@ -37,7 +38,9 @@ public class Main extends Application {
         }
 
         else {
-            launch(args);}
+            launch(args);
+
+        }
     }
     @Override
     public void start(Stage primiaryStage) throws Exception {
