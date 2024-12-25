@@ -61,20 +61,31 @@ public class Cart implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ProductObservableList.clear();  // Ensure no leftover data
+        ProductObservableList.clear();
         ProductInfo p = null;
         try {
-//            ArrayList<ProductInfo> allProducts = Dashboard.cart.getItemsInCart();
-            ArrayList<ProductInfo> allProducts = Login.customer.getCart().getItemsInCart();
-            for (ProductInfo x : allProducts){
-                System.out.println(x.getDetails());
-                ProductObservableList.add(x);
-//                System.out.println(allProducts);
+            if (Login.customer != null && Login.customer.getCart() != null) {
+                ArrayList<ProductInfo> allProducts = null;
+                try {
+                    allProducts = Login.customer.getCart().getItemsInCart();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
-            }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+                if (allProducts.isEmpty()) {
+                    // Optionally update UI to show "Cart is empty" message or just show empty table
+                    System.out.println("Your cart is empty.");
+                } else {
+                    for (ProductInfo x : allProducts) {
+                        ProductObservableList.add(x);
+                        table.refresh();
+                    }
+                }
+            }// Ensure no leftover data
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
 
         ProductID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProduct().getProductID()).asObject());
         Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
