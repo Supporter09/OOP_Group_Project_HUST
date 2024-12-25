@@ -102,9 +102,6 @@ public class    Login {
 
 
 
-
-
-
     public void handleRegisterButton(ActionEvent event) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/Register.fxml"));
         Parent root = fxmlLoader.load();

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.Order.Order;
 import model.Products.Product;
 import model.Products.ProductInfo;
+import model.Products.ReceiveProductInfo;
 import model.ReceiveNote.ReceiveNote;
 
 import model.Databases.OrderDB;
@@ -21,6 +22,8 @@ public class Report implements Serializable {
 //    private ArrayList<ProductInfo> productInfos;
     private LocalDate startDate;
     private LocalDate endDate;
+    private ArrayList<ReceiveProductInfo> receiveProductInfos;
+
 
     public Report(LocalDate startDate, LocalDate endDate) throws Exception {
         this.startDate = startDate;
@@ -28,6 +31,7 @@ public class Report implements Serializable {
         this.revenue = 0;
         this.costs = 0;
         this.profit = 0;
+        this.receiveProductInfos = null;
         this.calculateEveryThing();
     }
 
@@ -49,6 +53,10 @@ public class Report implements Serializable {
         this.calculateEveryThing();
     }
 
+    public ArrayList<ReceiveProductInfo> getReceiveProductInfos() {
+        return receiveProductInfos;
+    }
+
     public double getRevenue() {
         return revenue;
     }
@@ -61,27 +69,11 @@ public class Report implements Serializable {
         return profit;
     }
 
-//    public void setProductInfos(ArrayList<ProductInfo> productInfos) {
-//        this.productInfos = productInfos;
-//    }
-//
-//    public ArrayList<ProductInfo> getProductInfos() {
-//        return productInfos;
-//    }
-
     private void calculateEveryThing() throws Exception {
         OrderDB orderdb = new OrderDB();
         ReceiveNoteDB receivenotedb = new ReceiveNoteDB();
         ArrayList<Order> orderList = orderdb.getByPeriod(this.startDate, this.endDate);
         ArrayList<ReceiveNote> receivenoteList = receivenotedb.getByPeriod(this.startDate, this.endDate);
-
-//        for(Order x : orderList){
-//            ArrayList<ProductInfo> productInfoList = x.getProductInfoList();
-//            for (ProductInfo y : productInfoList){
-//                productInfos.add(y);
-//                System.out.println(y);
-//            }
-//        }
 
         double tmprevenue = 0;
         double tmpcosts = 0;
@@ -96,5 +88,9 @@ public class Report implements Serializable {
         this.revenue = tmprevenue;
         this.costs = tmpcosts;
         this.profit = tmpprofit;
+
+        for(ReceiveNote x : receivenoteList){
+            this.receiveProductInfos.add(x.getReceiveProductInfo());
+        }
     }
 }

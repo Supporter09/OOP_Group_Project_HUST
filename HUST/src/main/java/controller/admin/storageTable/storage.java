@@ -269,6 +269,7 @@ public class storage implements Initializable {
                     try {
                         Login.admin.removeProductFromStore(x.getProduct(), x.getQuantity());
                         store.removeProduct(x.getProduct(), x.getQuantity());
+                        table.refresh();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

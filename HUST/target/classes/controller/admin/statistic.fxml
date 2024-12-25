@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
@@ -86,18 +87,18 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="352.8000244140625" minHeight="10.0" prefHeight="86.1333297729492" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="638.6666702270508" minHeight="10.0" prefHeight="580.799967956543" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="638.6666702270508" minHeight="-Infinity" prefHeight="133.60003204345708" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="352.8000244140625" minHeight="10.0" prefHeight="247.73334960937504" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="638.6666702270508" minHeight="10.0" prefHeight="270.666650390625" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="638.6666702270508" minHeight="-Infinity" prefHeight="123.73337402343748" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TableView fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="485.0" prefWidth="954.0" tableMenuButtonVisible="true" GridPane.rowIndex="1">
+                        <TableView fx:id="tableOut" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="276.0" prefWidth="954.0" tableMenuButtonVisible="true" GridPane.rowIndex="2">
                           <columns>
-                            <TableColumn fx:id="id" minWidth="15.0" prefWidth="55.4666748046875" resizable="false" text="ID" />
-                            <TableColumn fx:id="name" prefWidth="246.40003967285156" text="Name" />
-                              <TableColumn fx:id="quantity" prefWidth="181.86669921875" text="Quantity" />
-                              <TableColumn fx:id="price" prefWidth="144.26678466796875" text="Price" />
-                              <TableColumn fx:id="total" prefWidth="202.13330078125" text="Total" />
-                              <TableColumn fx:id="note" prefWidth="109.86676025390625" text="Note" />
+                            <TableColumn fx:id="idOut" minWidth="15.0" prefWidth="55.4666748046875" resizable="false" text="ID" />
+                            <TableColumn fx:id="nameOut" prefWidth="409.59996032714844" text="Name" />
+                              <TableColumn fx:id="quantityOut" prefWidth="82.40008544921875" text="Quantity" />
+                              <TableColumn fx:id="priceOut" prefWidth="203.46673583984375" text="Price" />
+                              <TableColumn fx:id="totalOut" prefWidth="184.53326416015625" text="Total" />
                           </columns>
                         </TableView>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -124,40 +125,53 @@
                               <ChoiceBox fx:id="fromDate" layoutX="460.0" layoutY="36.0" prefHeight="26.0" prefWidth="63.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="956.0" GridPane.rowIndex="2">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="956.0" GridPane.rowIndex="3">
                            <children>
-                              <Label layoutX="38.0" layoutY="-10.0" text="Expense:" textFill="RED">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="38.0" layoutY="37.0" text="Revenue" textFill="RED">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="profitLable" layoutX="38.0" layoutY="84.0" text="Profit:" textFill="RED">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="expenseLabel" layoutX="155.0" layoutY="-10.0" text="0$">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="revenueLable" layoutX="155.0" layoutY="37.0" text="0$">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="profitLable" layoutX="155.0" layoutY="84.0" text="0$">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <HBox layoutX="27.0" layoutY="36.0" prefHeight="82.0" prefWidth="860.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="121.0" text="Expense:" textFill="RED">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="expenseLabel" prefHeight="35.0" prefWidth="169.0" text="0$">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="35.0" prefWidth="106.0" text="Revenue" textFill="RED">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="revenueLable" prefHeight="35.0" prefWidth="174.0" text="0$">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="profitLable" prefHeight="35.0" prefWidth="83.0" text="Profit:" textFill="RED">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="profitLable" prefHeight="35.0" prefWidth="127.0" text="0$">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
                            </children>
                         </AnchorPane>
+                        <TableView fx:id="tableIn" prefHeight="247.0" prefWidth="956.0" tableMenuButtonVisible="true" GridPane.rowIndex="1">
+                          <columns>
+                            <TableColumn prefWidth="54.933349609375" text="ID" />
+                            <TableColumn fx:id="nameIn" prefWidth="408.2667236328125" text="Name" />
+                              <TableColumn fx:id="quantityIn" prefWidth="85.33331298828125" text="Quantity" />
+                              <TableColumn fx:id="priceIn" prefWidth="202.400146484375" text="Price" />
+                              <TableColumn fx:id="totalIn" prefWidth="188.80010986328125" text="Total" />
+                          </columns>
+                        </TableView>
                      </children>
                   </GridPane>
                </children>
