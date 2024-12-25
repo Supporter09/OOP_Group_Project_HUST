@@ -70,7 +70,12 @@ public class Dashboard implements Initializable {
             ProductObservableList.clear();  // Ensure no leftover data
             try {
                 ArrayList<ProductInfo> allProducts = Store.getItemsInStore();
-                ProductObservableList.addAll(allProducts);
+                for (ProductInfo productInfo : allProducts) {
+                    if (productInfo.getQuantity() != 0){
+                        ProductObservableList.add(productInfo);
+                    }
+                }
+//                ProductObservableList.addAll(allProducts);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
