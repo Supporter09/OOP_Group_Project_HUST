@@ -19,7 +19,7 @@ import model.Users.User;
 
 import java.io.IOException;
 
-public class Login {
+public class    Login {
     @FXML
     TextField usernameField;
     @FXML
@@ -49,9 +49,21 @@ public class Login {
             try{
                 User user = userdb.getByUsernameAndPassword(username,password);
 
-                switch (user) {
-                    case Admin admin1 -> {
-                        admin = admin1;
+                switch (user.getRole()) {
+                    case "Staff" -> {
+                        staff = (Staff) user;
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
+                        Parent root = fxmlLoader.load();
+
+                        dashboard controller = fxmlLoader.getController();
+                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        dialogStage.setScene(scene);
+                        dialogStage.show();
+                    }
+
+                    case "Admin" -> {
+                        admin = (Admin) user;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
                         Parent root = fxmlLoader.load();
 
@@ -63,20 +75,9 @@ public class Login {
                         dialogStage.show();
                     }
 
-                    case Staff staff1 -> {
-                        staff = staff1;
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
-                        Parent root = fxmlLoader.load();
 
-                        dashboard controller = fxmlLoader.getController();
-                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        dialogStage.setScene(scene);
-                        dialogStage.show();
-
-                    }
-                    case Customer customer1 -> {
-                        customer = customer1;
+                    case "Customer" -> {
+                        customer = (Customer) user;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
                         Parent root = fxmlLoader.load();
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -112,7 +113,8 @@ public class Login {
         dialogStage.show();
     }
 
-    public void handleGuestButton(ActionEvent event) throws IOException {
+    public void handleGuestButton(ActionEvent event) throws Exception {
+        customer = new Customer("New","New");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

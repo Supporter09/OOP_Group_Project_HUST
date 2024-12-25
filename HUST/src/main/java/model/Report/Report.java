@@ -18,7 +18,7 @@ public class Report implements Serializable {
     private double revenue;
     private double costs;
     private double profit;
-    private ArrayList<ProductInfo> productInfos;
+//    private ArrayList<ProductInfo> productInfos;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -61,13 +61,13 @@ public class Report implements Serializable {
         return profit;
     }
 
-    public void setProductInfos(ArrayList<ProductInfo> productInfos) {
-        this.productInfos = productInfos;
-    }
-
-    public ArrayList<ProductInfo> getProductInfos() {
-        return productInfos;
-    }
+//    public void setProductInfos(ArrayList<ProductInfo> productInfos) {
+//        this.productInfos = productInfos;
+//    }
+//
+//    public ArrayList<ProductInfo> getProductInfos() {
+//        return productInfos;
+//    }
 
     private void calculateEveryThing() throws Exception {
         OrderDB orderdb = new OrderDB();

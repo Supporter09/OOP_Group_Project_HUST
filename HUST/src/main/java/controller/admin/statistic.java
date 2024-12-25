@@ -141,6 +141,8 @@ public class statistic implements Initializable {
                     Integer.parseInt(toMonth.getValue())
             );
             LocalDate endDate = endYearMonth.atDay(Integer.parseInt(toDate.getValue()));
+            System.out.println(startDate);
+            System.out.println(endDate);
             Report report = new Report(startDate, endDate);
 
             // Update the labels with the values from the report
