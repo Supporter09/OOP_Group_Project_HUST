@@ -44,16 +44,16 @@ public class Register {
         String password = passwordField.getText();
 
         if(fullname.isEmpty()){
-            HelperMethods.alertBox("Please enter your full name", null, "Login Failed!");
+            HelperMethods.alertBox("Please enter your full name", null, "Register Failed!");
         }
         else if (email.isEmpty()){
-            HelperMethods.alertBox("Please enter your email", null, "Login Failed!");
+            HelperMethods.alertBox("Please enter your email", null, "Register Failed!");
         }
         else if(username.isEmpty()){
-            HelperMethods.alertBox("Please enter your username", null, "Login Failed!");
+            HelperMethods.alertBox("Please enter your username", null, "Register Failed!");
         }
         else if (password.isEmpty()){
-            HelperMethods.alertBox("Please enter your password", null, "Login Failed!");
+            HelperMethods.alertBox("Please enter your password", null, "Register Failed!");
         }
         else{
             try{
