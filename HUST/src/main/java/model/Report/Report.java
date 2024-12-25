@@ -22,6 +22,8 @@ public class Report implements Serializable {
 //    private ArrayList<ProductInfo> productInfos;
     private LocalDate startDate;
     private LocalDate endDate;
+    private ArrayList<ReceiveProductInfo> receiveProductInfos;
+
 
     public Report(LocalDate startDate, LocalDate endDate) throws Exception {
         this.startDate = startDate;
@@ -29,6 +31,7 @@ public class Report implements Serializable {
         this.revenue = 0;
         this.costs = 0;
         this.profit = 0;
+        this.receiveProductInfos = null;
         this.calculateEveryThing();
     }
 
@@ -50,6 +53,10 @@ public class Report implements Serializable {
         this.calculateEveryThing();
     }
 
+    public ArrayList<ReceiveProductInfo> getReceiveProductInfos() {
+        return receiveProductInfos;
+    }
+
     public double getRevenue() {
         return revenue;
     }
@@ -68,12 +75,6 @@ public class Report implements Serializable {
         ArrayList<Order> orderList = orderdb.getByPeriod(this.startDate, this.endDate);
         ArrayList<ReceiveNote> receivenoteList = receivenotedb.getByPeriod(this.startDate, this.endDate);
 
-        ArrayList<ReceiveProductInfo> receiveProductInfos = null;
-
-        for(ReceiveNote x : receivenoteList){
-            receiveProductInfos.add(x.getReceiveProductInfo());
-        }
-
         double tmprevenue = 0;
         double tmpcosts = 0;
         double tmpprofit = 0;
@@ -87,5 +88,9 @@ public class Report implements Serializable {
         this.revenue = tmprevenue;
         this.costs = tmpcosts;
         this.profit = tmpprofit;
+
+        for(ReceiveNote x : receivenoteList){
+            this.receiveProductInfos.add(x.getReceiveProductInfo());
+        }
     }
 }

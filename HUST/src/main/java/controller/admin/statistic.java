@@ -16,7 +16,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Products.Product;
 import model.Products.ProductInfo;
+import model.Products.ReceiveProductInfo;
 import model.Report.Report;
 
 import java.io.IOException;
@@ -61,22 +63,22 @@ public class statistic implements Initializable {
     private Label expenseLabel;
 
     @FXML
-    private TableColumn<ProductInfo, Integer> idIn;
+    private TableColumn<ReceiveProductInfo, Integer> idIn;
 
     @FXML
-    private TableColumn<ProductInfo, String> nameIn;
+    private TableColumn<ReceiveProductInfo, String> nameIn;
 
     @FXML
-    private TableColumn<ProductInfo, Double> priceIn;
+    private TableColumn<ReceiveProductInfo, Double> priceIn;
 
     @FXML
-    private TableColumn<ProductInfo, Integer> quantityIn;
+    private TableColumn<ReceiveProductInfo, Integer> quantityIn;
 
     @FXML
-    private TableColumn<ProductInfo, Double> totalIn;
+    private TableColumn<ReceiveProductInfo, Double> totalIn;
 
     @FXML
-    private TableView<ProductInfo> tableIn;
+    private TableView<ReceiveProductInfo> tableIn;
 
     @FXML
     private TableColumn<ProductInfo, Integer> idOut;
@@ -101,7 +103,10 @@ public class statistic implements Initializable {
     private String[] date = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15",
                             "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
 
-    ObservableList<ProductInfo> productObservableList = FXCollections.observableArrayList();
+    ObservableList<ReceiveProductInfo> productIn = FXCollections.observableArrayList();
+
+
+
     @FXML
     public void handleDashboardButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
@@ -155,15 +160,17 @@ public class statistic implements Initializable {
                     Integer.parseInt(fromYear.getValue()),
                     Integer.parseInt(fromMonth.getValue())
             );
-            LocalDate startDate = startYearMonth.atDay(Integer.parseInt(fromDate.getValue()));
+            int startDay = Integer.parseInt(fromDate.getValue());
+
+            LocalDate startDate = startYearMonth.atDay(startDay);
 
             YearMonth endYearMonth = YearMonth.of(
                     Integer.parseInt(toYear.getValue()),
                     Integer.parseInt(toMonth.getValue())
             );
-            LocalDate endDate = endYearMonth.atDay(Integer.parseInt(toDate.getValue()));
-            System.out.println(startDate);
-            System.out.println(endDate);
+            int endDay = Integer.parseInt(toDate.getValue());
+            LocalDate endDate = endYearMonth.atDay(endDay);
+
             Report report = new Report(startDate, endDate);
 
             // Update the labels with the values from the report
@@ -171,24 +178,27 @@ public class statistic implements Initializable {
             revenueLable.setText(String.valueOf(report.getRevenue()));
             profitLable.setText(String.valueOf(report.getProfit()));
 
-//            ProductInfo p = null;
-//            try {
-//                ArrayList<ProductInfo> allProducts = report.getProductInfos();
-//                for(ProductInfo x : allProducts){
-//                    productObservableList.add(x);
-//                }
-//            } catch (Exception ex) {
-//                throw new RuntimeException(ex);
-//            }
-//
-//            id.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProduct().getProductID()).asObject());
-//            name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
-//            price.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProduct().getPrice()).asObject());
-//            quantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
-//
-//            table.setItems(productObservableList);
-//            table.refresh();
+            ReceiveProductInfo r = null;
+            try {
+                ArrayList<ReceiveProductInfo> allProducts = report.getReceiveProductInfos();
+                for(ReceiveProductInfo x : allProducts){
+                    productIn.add(x);
+                }
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
 
+            idIn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProduct().getProductID()).asObject());
+            nameIn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
+            priceIn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getProduct().getPrice()).asObject());
+            quantityIn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+            totalIn.setCellValueFactory(cellData ->{
+                ReceiveProductInfo product = cellData.getValue();
+                double total = product.getQuantity() * product.getReceivePrice();
+                return new SimpleDoubleProperty(total).asObject();
+            });
+
+            tableIn.setItems(productIn);
         }
 
 
