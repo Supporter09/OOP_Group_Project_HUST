@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Cart.Cart;
+import model.Databases.SalaryInfoDB;
 import model.Databases.UserDB;
+import model.SalaryInfo.SalaryInfo;
 import model.Store.Store;
 import model.Users.Staff;
 import model.Users.User;
@@ -254,6 +256,35 @@ public class employee implements Initializable {
         scene = new Scene(root);
         dialogStage.setScene(scene);
         dialogStage.show();
+    }
+
+    public void handlePayButton(ActionEvent event) throws IOException{
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Pay Salary");
+        confirmationAlert.setHeaderText("Are you sure you want to pay salary to the employees?");
+
+        confirmationAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                UserDB userDB = new UserDB();
+                ArrayList<Staff> staffs = new ArrayList<Staff>();
+                try {
+                    for(User x : userDB.getAllUsers()){
+                        if (x instanceof Staff){
+                            staffs.add((Staff) x);
+                        }
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                SalaryInfoDB salaryInfoDB = new SalaryInfoDB();
+                try {
+                    salaryInfoDB.add(new SalaryInfo(staffs,LocalDate.now()));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
 }

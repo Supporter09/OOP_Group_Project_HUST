@@ -56,7 +56,7 @@ public class    Login {
                         Parent root = fxmlLoader.load();
 
                         controller.admin.dashboard controller = fxmlLoader.getController();
-                        controller.sendName(admin.getUsername());
+
 
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
