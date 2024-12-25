@@ -62,25 +62,7 @@ public class storage implements Initializable {
     private TableColumn<ProductInfo, String> type;
 
     public void handleDashboardButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
-
-    public void handleEmployeeButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/employeeTable/employee.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
-
-    public void handleStatisticButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/statistic.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -98,7 +80,7 @@ public class storage implements Initializable {
     }
 
     public void handleInsertButton(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/insertStorage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/insertStorage.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -223,7 +205,7 @@ public class storage implements Initializable {
         for (ProductInfo x : selectedItems){
             if(x.getProduct() instanceof Book){
                 editable = x.getProduct();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/BookEdit.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/BookEdit.fxml"));
                 Parent root = fxmlLoader.load();
                 dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -232,7 +214,7 @@ public class storage implements Initializable {
             }
             else if (x.getProduct() instanceof Toy){
                 editable = x.getProduct();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/ToyEdit.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/ToyEdit.fxml"));
                 Parent root = fxmlLoader.load();
                 dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -241,7 +223,7 @@ public class storage implements Initializable {
             }
             else {
                 editable = x.getProduct();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/StationaryEdit.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/StationaryEdit.fxml"));
                 Parent root = fxmlLoader.load();
                 dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);

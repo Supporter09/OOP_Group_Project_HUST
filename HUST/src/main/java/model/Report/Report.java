@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.Order.Order;
 import model.Products.Product;
 import model.Products.ProductInfo;
+import model.Products.ReceiveProductInfo;
 import model.ReceiveNote.ReceiveNote;
 
 import model.Databases.OrderDB;
@@ -61,27 +62,17 @@ public class Report implements Serializable {
         return profit;
     }
 
-//    public void setProductInfos(ArrayList<ProductInfo> productInfos) {
-//        this.productInfos = productInfos;
-//    }
-//
-//    public ArrayList<ProductInfo> getProductInfos() {
-//        return productInfos;
-//    }
-
     private void calculateEveryThing() throws Exception {
         OrderDB orderdb = new OrderDB();
         ReceiveNoteDB receivenotedb = new ReceiveNoteDB();
         ArrayList<Order> orderList = orderdb.getByPeriod(this.startDate, this.endDate);
         ArrayList<ReceiveNote> receivenoteList = receivenotedb.getByPeriod(this.startDate, this.endDate);
 
-//        for(Order x : orderList){
-//            ArrayList<ProductInfo> productInfoList = x.getProductInfoList();
-//            for (ProductInfo y : productInfoList){
-//                productInfos.add(y);
-//                System.out.println(y);
-//            }
-//        }
+        ArrayList<ReceiveProductInfo> receiveProductInfos = null;
+
+        for(ReceiveNote x : receivenoteList){
+            receiveProductInfos.add(x.getReceiveProductInfo());
+        }
 
         double tmprevenue = 0;
         double tmpcosts = 0;

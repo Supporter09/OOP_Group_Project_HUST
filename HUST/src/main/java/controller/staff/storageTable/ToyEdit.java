@@ -35,7 +35,7 @@ public class ToyEdit implements Initializable {
 
 
     public void handleDashboardButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -43,23 +43,6 @@ public class ToyEdit implements Initializable {
         dialogStage.show();
     }
 
-    public void handleEmployeeButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/employeeTable/employee.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
-
-    public void handleStatisticButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/statistic.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
 
     public void handleLogoutButton(ActionEvent event) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/Login.fxml"));
@@ -71,7 +54,7 @@ public class ToyEdit implements Initializable {
     }
 
     public void handleStorageButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/storage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/storage.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -80,7 +63,7 @@ public class ToyEdit implements Initializable {
     }
 
     public void handleReturnButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/storage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/storage.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -108,7 +91,7 @@ public class ToyEdit implements Initializable {
         alert.setHeaderText("Edit toy's information successfully!");
         alert.showAndWait();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/storage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/storageTable/storage.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -61,19 +61,40 @@ public class statistic implements Initializable {
     private Label expenseLabel;
 
     @FXML
-    private TableColumn<ProductInfo, Integer> id;
+    private TableColumn<ProductInfo, Integer> idIn;
 
     @FXML
-    private TableColumn<ProductInfo, String> name;
+    private TableColumn<ProductInfo, String> nameIn;
 
     @FXML
-    private TableColumn<ProductInfo, Double> price;
+    private TableColumn<ProductInfo, Double> priceIn;
 
     @FXML
-    private TableColumn<ProductInfo, Integer> quantity;
+    private TableColumn<ProductInfo, Integer> quantityIn;
 
     @FXML
-    private TableView<ProductInfo> table;
+    private TableColumn<ProductInfo, Double> totalIn;
+
+    @FXML
+    private TableView<ProductInfo> tableIn;
+
+    @FXML
+    private TableColumn<ProductInfo, Integer> idOut;
+
+    @FXML
+    private TableColumn<ProductInfo, String> nameOut;
+
+    @FXML
+    private TableColumn<ProductInfo, Double> priceOut;
+
+    @FXML
+    private TableColumn<ProductInfo, Integer> quantityOut;
+
+    @FXML
+    private TableColumn<ProductInfo, Double> totalOut;
+
+    @FXML
+    private TableView<ProductInfo> tableIOut;
 
     private String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
     private String[] year = {"2023","2024"};
