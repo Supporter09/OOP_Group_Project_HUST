@@ -276,6 +276,7 @@ public class Dashboard implements Initializable {
         dialogStage.setScene(scene);
         dialogStage.show();
     }
+
     public void handleLogoutButton(ActionEvent event) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/Login.fxml"));
         Parent root = fxmlLoader.load();

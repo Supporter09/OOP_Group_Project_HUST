@@ -2,6 +2,7 @@ package model.Users;
 
 import model.Databases.OrderDB;
 import model.Databases.ReceiveNoteDB;
+import model.Databases.SalaryInfoDB;
 import model.Databases.UserDB;
 import model.Order.Order;
 import model.Products.Book;
@@ -9,6 +10,7 @@ import model.Products.Product;
 import model.Products.Stationary;
 import model.Products.Toy;
 import model.ReceiveNote.ReceiveNote;
+import model.SalaryInfo.SalaryInfo;
 import model.Store.Store;
 
 import java.time.LocalDate;
@@ -30,6 +32,11 @@ public class Staff extends User {
         this.phone = phone;
         this.dateJoined = dateJoined;
         this.salary = salary;
+        ArrayList<Staff> tmp = new ArrayList<Staff>();
+        tmp.add(this);
+
+        SalaryInfoDB salaryInfoDB = new SalaryInfoDB();
+        salaryInfoDB.add(new SalaryInfo(tmp,LocalDate.now()));
         UserDB userdb = new UserDB();
         userdb.update(this);
         // TODO Auto-generated constructor stub
@@ -55,7 +62,7 @@ public class Staff extends User {
         this.dateJoined = dateJoined;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(float salary) throws Exception {
         this.salary = salary;
     }
 
@@ -201,6 +208,11 @@ public class Staff extends User {
     public ArrayList<ReceiveNote> getAllReceiveNotes() throws Exception {
         ReceiveNoteDB receivenotedb = new ReceiveNoteDB();
         return receivenotedb.getAllReceiveNotes();
+    }
+
+    public ArrayList<ReceiveNote> getAllReceiveNotesByPeriod(LocalDate start, LocalDate end) throws Exception {
+        ReceiveNoteDB receivenotedb = new ReceiveNoteDB();
+        return receivenotedb.getByPeriod(start,end);
     }
 
     public void printAllReceiveNotes() throws Exception {
