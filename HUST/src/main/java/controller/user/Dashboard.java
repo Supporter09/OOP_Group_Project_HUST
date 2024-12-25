@@ -21,7 +21,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Cart.Cart;
 import model.Databases.ProductDB;
+import model.Products.Book;
 import model.Products.ProductInfo;
+import model.Products.Stationary;
+import model.Products.Toy;
 import model.Store.Store;
 
 import java.io.IOException;
@@ -116,6 +119,58 @@ public class Dashboard implements Initializable {
         // Set the final sorted and filtered list as the data source for the TableView
         table.setItems(ProductSortedList);
         table.refresh();
+        table.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Check for double-click
+                ProductInfo selectedProduct = table.getSelectionModel().getSelectedItem();
+                if (selectedProduct != null) {
+                    showProductDetails(selectedProduct);
+                }
+            }
+        });
+    }
+    private void showProductDetails(ProductInfo product) {
+        if (product.getProduct() instanceof Book) {
+            Alert productDetailsAlert = new Alert(Alert.AlertType.INFORMATION);
+            productDetailsAlert.setHeaderText("Book details:");
+            productDetailsAlert.setTitle("Details");
+            productDetailsAlert.setContentText(
+                "Name: " + product.getProduct().getName() + "\n" +
+                "Type: " + product.getProduct().getType() + "\n" +
+                "Author: " + ((Book) product.getProduct()).getAuthor() +"\n" +
+                "ISBN: " + ((Book) product.getProduct()).getISBN() + "\n" +
+                "Publisher: " + ((Book) product.getProduct()).getPublisher() + '\n'+
+                "Description: " + product.getProduct().getDescription() + "\n" +
+                "Price: " + product.getProduct().getPrice() + "\n"
+
+            );
+            productDetailsAlert.showAndWait();
+        } else if (product.getProduct() instanceof Toy) {
+            Alert productDetailsAlert1 = new Alert(Alert.AlertType.INFORMATION);
+            productDetailsAlert1.setTitle("Details");
+            productDetailsAlert1.setHeaderText("Toy details:");
+            productDetailsAlert1.setContentText(
+                "Name: " + product.getProduct().getName() + "\n" +
+                "Type: " + product.getProduct().getType() + "\n" +
+                "Brand: " + ((Toy) product.getProduct()).getBrand() +"\n" +
+                "Description: " + product.getProduct().getDescription() + "\n" +
+                "Price: " + product.getProduct().getPrice() + "\n"
+
+            );
+            productDetailsAlert1.showAndWait();
+        } else if (product.getProduct() instanceof Stationary) {
+            Alert productDetailsAlert2 = new Alert(Alert.AlertType.INFORMATION);
+            productDetailsAlert2.setTitle("Details");
+            productDetailsAlert2.setHeaderText("Stationary details:");
+            productDetailsAlert2.setContentText(
+                    "Name: " + product.getProduct().getName() + "\n" +
+                    "Type: " + product.getProduct().getType() + "\n" +
+                    "Stationary Type: " + ((Stationary) product.getProduct()).getStationaryType() +"\n" +
+                    "Brand:  " + ((Stationary) product.getProduct()).getBrand() +"\n" +
+                    "Description: " + product.getProduct().getDescription() + "\n" +
+                    "Price: " + product.getProduct().getPrice() + "\n"
+            );
+            productDetailsAlert2.showAndWait();
+        }
     }
     @FXML
     private int handleAddtoCartButton(ActionEvent event) {

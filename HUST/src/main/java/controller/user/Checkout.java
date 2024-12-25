@@ -123,7 +123,15 @@ public class Checkout implements Initializable {
     @FXML
     public int handleOrderButton(ActionEvent event) throws Exception {
             String selectedPaymentMethod = PaymentMethods.getValue(); // Get selected value
-
+            if (Login.customer.getCart().getItemsInCart().isEmpty()) {
+                // Show an alert if the cart is empty
+                Alert emptyCartAlert = new Alert(Alert.AlertType.WARNING);
+                emptyCartAlert.setTitle("Cart is Empty");
+                emptyCartAlert.setHeaderText("Your cart is empty!");
+                emptyCartAlert.setContentText("Please add items to your cart before placing an order.");
+                emptyCartAlert.showAndWait();
+                return -1; // Exit the method as there's nothing to process
+            }
             if (selectedPaymentMethod == null || selectedPaymentMethod.isEmpty()) {
                 // Show an error if no payment method is selected
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -145,8 +153,6 @@ public class Checkout implements Initializable {
                     confirmalert.showAndWait();
                     processOrder(selectedPaymentMethod);
                 }
-
-
 
             }
         return 0;
