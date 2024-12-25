@@ -6,6 +6,7 @@ import model.exception.DatabaseNotAvailableException;
 import model.Products.Product;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -291,6 +292,22 @@ public class ReceiveNoteDB {
         }
         this.read();
         return this.db;
+    }
+
+    public ArrayList<ReceiveNote> getByPeriod(LocalDate startDate, LocalDate endDate) throws Exception { // get all order created in [startDate, endDate]
+        if(!this.avail)
+        {
+            throw new DatabaseNotAvailableException(ANSI_RED + "The database is not available" + ANSI_RESET);
+        }
+        this.read();
+        ArrayList<ReceiveNote> res = new ArrayList<ReceiveNote>();
+        for(ReceiveNote e : this.db) {
+            if((e.getReceiveNoteDate().isEqual(startDate) || e.getReceiveNoteDate().isAfter(startDate))
+                    && (e.getReceiveNoteDate().isEqual(endDate) || e.getReceiveNoteDate().isBefore(endDate))) {
+                res.add(e);
+            }
+        }
+        return res;
     }
 
     public boolean isEmpty() throws Exception

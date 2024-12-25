@@ -5,6 +5,7 @@ import model.Users.User;
 import model.exception.DatabaseNotAvailableException;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -286,7 +287,22 @@ public class OrderDB {
         this.read();
         return this.db.isEmpty();
     }
-    
+
+    public ArrayList<Order> getByPeriod(LocalDate startDate, LocalDate endDate) throws Exception { // get all order created in [startDate, endDate]
+        if(!this.avail)
+        {
+            throw new DatabaseNotAvailableException(ANSI_RED + "The database is not available" + ANSI_RESET);
+        }
+        this.read();
+        ArrayList<Order> res = new ArrayList<Order>();
+        for(Order e : this.db) {
+            if((e.getOrderDate().isEqual(startDate) || e.getOrderDate().isAfter(startDate)) && (e.getOrderDate().isEqual(endDate) || e.getOrderDate().isBefore(endDate))) {
+                res.add(e);
+            }
+        }
+        return res;
+    }
+
     public int size() throws Exception
     {
         if(!this.avail)

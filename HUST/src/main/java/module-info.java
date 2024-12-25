@@ -6,9 +6,12 @@ module app {
     opens app to javafx.fxml;
     opens controller to javafx.fxml;
     opens controller.admin to javafx.fxml;
+    opens controller.user to javafx.fxml;
+    opens controller.staff to javafx.fxml;
+    opens controller.staff.storageTable to javafx.fxml;
     opens controller.admin.employeeTable to javafx.fxml;
     opens controller.admin.storageTable to javafx.fxml;
-    opens controller.user to javafx.fxml;
+
     opens model.Users to javafx.fxml;
     opens model.Cart to javafx.fxml;
     opens model.Databases to javafx.fxml;
@@ -18,13 +21,15 @@ module app {
     opens model.ReceiveNote to javafx.fxml;
     opens model.Store to javafx.fxml;
 
+
     exports app;
     exports controller;
     exports controller.admin;
     exports controller.admin.employeeTable;
     exports controller.admin.storageTable;
     exports controller.user;
-
+    exports controller.staff;
+    exports controller.staff.storageTable;
 
     exports model.Products;
     exports model.Cart;

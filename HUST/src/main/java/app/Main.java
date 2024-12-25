@@ -37,48 +37,7 @@ public class Main extends Application {
         }
 
         else {
-//            store.addProduct(new Book("Abc",12.4,"123","A",1),10);
             launch(args);}
-//        List<employee> store = new ArrayList<>();
-//        employee A = new employee(1,"Nhật Minh","","9/1/2024",90500);
-//        employee B = new employee(2,"Công Minh","",23/1/2024",20090);
-//        employee C = new employee(3,"Quốc Hùng","","13/1/2024",30600);
-//        employee D = new employee(4,"Đức Duy","","1/1/2024",40002);
-//        employee E = new employee(5,"Trung Anh","","20/1/2024",6000);
-//        employee F = new employee(6,"Anh Minh","","6/1/2024",8000);
-//
-//        try{
-//            FileOutputStream fos = new FileOutputStream("C:\\Users\\Long\\Desktop\\Local\\Studying\\SOICT\\OOP\\Project\\HUST\\src\\main\\java\\app\\data\\employee.data");
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(A);
-//            oos.writeObject(B);
-//            oos.writeObject(C);
-//            oos.writeObject(D);
-//            oos.writeObject(E);
-//            oos.writeObject(F);
-//            oos.close();
-//            fos.close();
-//
-//        }catch (Exception k){ }
-
-
-//
-//        employee e = null;
-
-//        try {
-//            FileInputStream fis = new FileInputStream("C:\\Users\\Long\\Desktop\\Local\\Studying\\SOICT\\OOP\\Project\\HUST\\src\\main\\java\\app\\data\\employee.data");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            while (true) {
-//                e = (employee) ois.readObject();
-//                store.add(e);
-//            }
-//
-//        } catch (Exception tmp) {
-//            System.out.println(tmp);
-//        }
-//        for (employee i : store) {
-//            System.out.println(i);
-//        }
     }
     @Override
     public void start(Stage primiaryStage) throws Exception {
@@ -133,6 +92,7 @@ public class Main extends Application {
     {
         Customer customer1 = generateCustomer("Bui Cong Minh", "Em Fan Anh 7");
         Customer customer2 = generateCustomer("Binh Cong Mui", "Em Fan Anh 10");
+        Customer customer3 = generateCustomer("0", "0");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dateString = "20/01/2024";
@@ -144,6 +104,7 @@ public class Main extends Application {
         Staff staff4 = generateStaff("Đặng Trung Anh","123","0987654321",date,4000);
         Staff staff5 = generateStaff("Bùi Công Minh","123","0987654321",date,5000);
         Staff staff6 = generateStaff("Nguyễn Thái Anh Minh","123","0987654321",date,200);
+        Staff staff7 = generateStaff("2","2","0987654321",date,200);
         Admin test = new Admin("1","1","0",date,0);
 
 

@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Products.Book;
+import model.Products.Stationary;
+import model.Products.Toy;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,14 +83,6 @@ public class insertStorage implements Initializable {
         dialogStage.show();
     }
 
-    public void handleOrderButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/order.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
 
     public void handleStorageButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/storage.fxml"));
@@ -168,10 +162,13 @@ public class insertStorage implements Initializable {
             dialogStage.setScene(scene);
             dialogStage.show();
         }
-
+//            lb1.setText("Name");
+//            lb2.setText("Price");
+//            lb3.setText("Brand");
+//            lb4.setText("Description");
+//            lb5.setText("Import price");
         else if (Objects.equals(typeField.getValue(), "Toy")){
-            if (tf1.getText().isEmpty() || tf2.getText().isEmpty() ||tf3.getText().isEmpty() ||
-                    tf6.getText().isEmpty() ||tf5.getText().isEmpty()){
+            if (tf1.getText().isEmpty() || tf2.getText().isEmpty() ||tf3.getText().isEmpty() || tf5.getText().isEmpty()){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Invalid Input");
                 errorAlert.setHeaderText("Please fill in all field!");
@@ -179,12 +176,12 @@ public class insertStorage implements Initializable {
                 return;
             }
             try {
-                Login.admin.addProductToStore(new Book(tf1.getText(), Float.parseFloat(tf2.getText()), tf6.getText(),
-                        tf3.getText(), tf4.getText(), Integer.parseInt(tf5.getText())), 1, Float.parseFloat(tf7.getText()));
+                Login.admin.addProductToStore(new Toy(tf1.getText(),Float.parseFloat(tf2.getText()),tf4.getText(),tf3.getText()),
+                        1,Float.parseFloat(tf5.getText()));
             } catch (NumberFormatException e){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Invalid Input");
-                errorAlert.setHeaderText("Price, ISBN and import price must be a valid number.");
+                errorAlert.setHeaderText("Price and import price must be a valid number.");
                 errorAlert.show();
                 return;
             }
@@ -201,7 +198,44 @@ public class insertStorage implements Initializable {
             dialogStage.show();
         }
 
+        else if (Objects.equals(typeField.getValue(), "Stationary")){
+//            lb1.setText("Name");
+//            lb2.setText("Price");
+//            lb3.setText("Brand");
+//            lb4.setText("Stationary Type");
+//            lb5.setText("Description");
+//            lb6.setText("Import price");
+            if (tf1.getText().isEmpty() || tf2.getText().isEmpty() ||tf3.getText().isEmpty() ||
+                    tf4.getText().isEmpty() ||tf6.getText().isEmpty()){
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Invalid Input");
+                errorAlert.setHeaderText("Please fill in all field!");
+                errorAlert.show();
+                return;
+            }
+            try {
+                Login.admin.addProductToStore(new Stationary(
+                        tf1.getText(),Float.parseFloat(tf2.getText()),tf5.getText(),tf3.getText(),tf4.getText()),
+                        1,Float.parseFloat(tf6.getText()));
+            } catch (NumberFormatException e){
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Invalid Input");
+                errorAlert.setHeaderText("Price and import price must be a valid number.");
+                errorAlert.show();
+                return;
+            }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Add product successfully");
+            alert.setHeaderText("Add stationary successfully");
+            alert.showAndWait();
 
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/storageTable/storage.fxml"));
+            Parent root = fxmlLoader.load();
+            dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
 
     }
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Databases.UserDB;
@@ -16,8 +17,6 @@ import model.Users.Customer;
 import model.Users.Staff;
 import model.Users.User;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class Login {
@@ -50,34 +49,56 @@ public class Login {
             try{
                 User user = userdb.getByUsernameAndPassword(username,password);
 
-                if (user instanceof Admin){
-                        admin = (Admin) user;
+                switch (user) {
+                    case Admin admin1 -> {
+                        admin = admin1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
                         Parent root = fxmlLoader.load();
 
                         dashboard controller = fxmlLoader.getController();
-                        controller.sendName(user.getUsername());
 
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         dialogStage.setScene(scene);
                         dialogStage.show();
-                }
-                else {
-                    customer = (Customer) user;
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
-                    Parent root = fxmlLoader.load();
-                    dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    dialogStage.setScene(scene);
-                    dialogStage.show();
+                    }
+
+                    case Staff staff1 -> {
+                        staff = staff1;
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
+                        Parent root = fxmlLoader.load();
+
+                        dashboard controller = fxmlLoader.getController();
+                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        dialogStage.setScene(scene);
+                        dialogStage.show();
+
+                    }
+                    case Customer customer1 -> {
+                        customer = customer1;
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
+                        Parent root = fxmlLoader.load();
+                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        dialogStage.setScene(scene);
+                        dialogStage.show();
+                    }
+                    case null, default -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Wrong Information");
+                        alert.setHeaderText("Please check your username and password!");
+                        alert.showAndWait();
+                    }
                 }
                     }catch (Exception e) {
                          System.out.println(e);
                     }
 
             }
-            }
+    }
+
+
 
 
 

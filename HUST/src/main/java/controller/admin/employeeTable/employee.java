@@ -17,6 +17,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
+import model.Cart.Cart;
 import model.Databases.UserDB;
 import model.Store.Store;
 import model.Users.Staff;
@@ -115,8 +116,6 @@ public class employee implements Initializable {
 
         // Set the final sorted and filtered list as the data source for the TableView
         table.setItems(employeeSortedList);
-
-
     }
 
     private void editData(){
@@ -213,15 +212,6 @@ public class employee implements Initializable {
 
     public void handleDashboardButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        dialogStage.setScene(scene);
-        dialogStage.show();
-    }
-
-    public void handleOrderButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/order.fxml"));
         Parent root = fxmlLoader.load();
         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
