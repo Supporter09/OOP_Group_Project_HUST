@@ -49,25 +49,14 @@ public class    Login {
             try{
                 User user = userdb.getByUsernameAndPassword(username,password);
 
-                switch (user.getRole()) {
-                    case "Staff" -> {
-                        staff = (Staff) user;
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
-                        Parent root = fxmlLoader.load();
-
-                        dashboard controller = fxmlLoader.getController();
-                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        dialogStage.setScene(scene);
-                        dialogStage.show();
-                    }
-
-                    case "Admin" -> {
-                        admin = (Admin) user;
+                switch (user) {
+                    case Admin admin1 -> {
+                        admin = admin1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
                         Parent root = fxmlLoader.load();
 
-                        dashboard controller = fxmlLoader.getController();
+                        controller.admin.dashboard controller = fxmlLoader.getController();
+                        controller.sendName(admin.getUsername());
 
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
@@ -75,9 +64,22 @@ public class    Login {
                         dialogStage.show();
                     }
 
+                    case Staff staff1 -> {
+                        staff = staff1;
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
+                        Parent root = fxmlLoader.load();
 
-                    case "Customer" -> {
-                        customer = (Customer) user;
+                        controller.staff.dashboard controller = fxmlLoader.getController();
+                        controller.initialize(null, null);  // This will set the name using the staff username
+
+                        dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        dialogStage.setScene(scene);
+                        dialogStage.show();
+                    }
+
+                    case Customer customer1 -> {
+                        customer = customer1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
                         Parent root = fxmlLoader.load();
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -92,11 +94,10 @@ public class    Login {
                         alert.showAndWait();
                     }
                 }
-                    }catch (Exception e) {
-                         System.out.println(e);
-                    }
-
+            } catch (Exception e) {
+                System.out.println(e);
             }
+        }
     }
 
 
