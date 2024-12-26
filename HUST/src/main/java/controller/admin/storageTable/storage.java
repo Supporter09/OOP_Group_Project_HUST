@@ -257,6 +257,14 @@ public class storage implements Initializable {
         TableView.TableViewSelectionModel<ProductInfo> selectionModel = table.getSelectionModel();
         ObservableList<ProductInfo> selectedItems = selectionModel.getSelectedItems();
 
+        if (selectedItems == null || selectedItems.isEmpty()) {
+            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+            warningAlert.setTitle("No Product Selected");
+            warningAlert.setHeaderText("Please choose a product");
+            warningAlert.showAndWait();
+            return; // Exit the method if no selection
+        }
+
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
 
         confirmationAlert.setTitle("Confirm Deletion");

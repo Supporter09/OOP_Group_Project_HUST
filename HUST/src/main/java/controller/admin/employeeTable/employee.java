@@ -187,6 +187,14 @@ public class employee implements Initializable {
         TableView.TableViewSelectionModel<Staff> selectionModel = table.getSelectionModel();
         ObservableList<Staff> selectedItems = selectionModel.getSelectedItems();
 
+        if (selectedItems == null || selectedItems.isEmpty()) {
+            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+            warningAlert.setTitle("No Employee Selected");
+            warningAlert.setHeaderText("Please choose an employee.");
+            warningAlert.showAndWait();
+            return; // Exit the method if no selection
+        }
+
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Confirm Deletion");
         confirmationAlert.setHeaderText("Are you sure you want to delete the selected employee?");

@@ -99,11 +99,14 @@ public class Main extends Application {
 
 //        Customer customer1 = generateCustomer("Bui Cong Minh", "Em Fan Anh 7");
 //        Customer customer2 = generateCustomer("Binh Cong Mui", "Em Fan Anh 10");
+        Admin adminTest = new Admin("1","1","1",LocalDate.parse("01/01/2024",formatter),0);
+        Staff staffTest = generateStaff("2","2","2",LocalDate.parse("01/01/2024",formatter),0);
+        Customer customerTest = generateCustomer("0","0");
 
-        Admin admin = new Admin("Mai Văn Nhât Minh","333","0192999492",LocalDate.parse("01/01/2024",formatter),800);
+        Admin admin = new Admin("Mai Văn Nhật Minh","333","0192999492",LocalDate.parse("01/01/2024",formatter),800);
 
         Staff staff1 = generateStaff("Phạm Đức Duy","123","0916569655", LocalDate.parse("21/07/2024", formatter),3750);
-        Staff staff2 = generateStaff("Mai Văn Nhât Minh","123","0981545964",LocalDate.parse("19/05/2024", formatter),440);
+        Staff staff2 = generateStaff("Mai Văn Nhật Minh","123","0981545964",LocalDate.parse("19/05/2024", formatter),440);
         Staff staff3 = generateStaff("Tạ Quốc Hùng","123","0983659452",LocalDate.parse("08/11/2024", formatter),300);
         Staff staff4 = generateStaff("Đặng Trung Anh","123","0905975125",LocalDate.parse("17/12/2024", formatter),400);
         Staff staff5 = generateStaff("Bùi Công Minh","123","0989630214",LocalDate.parse("14/10/2024", formatter),350);
