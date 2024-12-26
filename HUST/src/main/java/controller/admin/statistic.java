@@ -186,7 +186,7 @@ public class statistic implements Initializable {
             // Update the labels with the values from the report
             expenseLabel.setText((report.getCosts() + Double.parseDouble(fixedCostTf.getText())) +"$");
             revenueLable.setText(report.getRevenue() +"$");
-            profitLable.setText(report.getProfit() +"$");
+            profitLable.setText((report.getProfit() - Double.parseDouble(fixedCostTf.getText())) +"$");
 
             store.setFixCost(Double.parseDouble(fixedCostTf.getText()));
 

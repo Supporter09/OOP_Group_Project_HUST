@@ -3,10 +3,10 @@ package model.Products;
 import model.Databases.ProductDB;
 
 public class Book extends Product {
-	
+
     private static final long serialVersionUID = 1L;
     private String publisher;
-	private String author;
+    private String author;
     private int ISBN;
     private String type = "Book";
 
@@ -21,12 +21,12 @@ public class Book extends Product {
 
     @Override
     public String getDetails() {
-        return "Book [" + this.getProductID() + "] :\n" + 
-                "Name: " + this.getName() + '\n' + 
-                "Price: " + this.getPrice() + '\n' + 
+        return "Book [" + this.getProductID() + "] :\n" +
+                "Name: " + this.getName() + '\n' +
+                "Price: " + this.getPrice() + '\n' +
                 "Description: " + this.getDescription() + '\n' +
                 "Publisher: " + this.getPublisher() + '\n'+
-                "Author: " + this.getAuthor() + '\n' + 
+                "Author: " + this.getAuthor() + '\n' +
                 "ISBN " + this.getISBN()
                 ;
     }

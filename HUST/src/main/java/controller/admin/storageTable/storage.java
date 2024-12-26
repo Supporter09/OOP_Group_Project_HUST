@@ -20,11 +20,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import model.Products.Book;
 import model.Products.Product;
 import model.Products.ProductInfo;
 import model.Products.Toy;
 import model.Store.Store;
+import model.Products.Book;
 
 import java.io.IOException;
 import java.net.URL;

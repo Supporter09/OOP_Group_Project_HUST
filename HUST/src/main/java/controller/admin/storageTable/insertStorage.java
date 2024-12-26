@@ -10,9 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Products.Book;
 import model.Products.Stationary;
 import model.Products.Toy;
+import model.Products.Book;
 
 import java.io.IOException;
 import java.net.URL;

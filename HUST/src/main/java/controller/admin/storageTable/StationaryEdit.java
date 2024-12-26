@@ -11,9 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Products.Book;
 import model.Products.Stationary;
-import model.Products.Toy;
 
 import java.io.IOException;
 import java.net.URL;
