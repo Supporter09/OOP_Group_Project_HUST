@@ -283,6 +283,15 @@ public class insertStorage implements Initializable {
         tf7.setManaged(tf7Vis);
         tf8.setManaged(tf8Vis);
 
+        tf1.clear();
+        tf2.clear();
+        tf3.clear();
+        tf4.clear();
+        tf5.clear();
+        tf6.clear();
+        tf7.clear();
+        tf8.clear();
+
         lb1.setVisible(tf1Vis);
         lb2.setVisible(tf2Vis);
         lb3.setVisible(tf3Vis);
