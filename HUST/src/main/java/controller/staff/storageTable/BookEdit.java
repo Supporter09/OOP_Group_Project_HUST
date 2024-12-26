@@ -88,12 +88,12 @@ public class BookEdit implements Initializable {
             return;
         }
 
-        Login.admin.updateNameOfProduct(storage.editable,tf1.getText());
-        Login.admin.updateAuthorOfBook((Book) storage.editable,tf4.getText());
-        Login.admin.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
-        Login.admin.updateDescriptionOfProduct(storage.editable,tf6.getText());
-        Login.admin.updateIBMSOfBook((Book) storage.editable,Integer.parseInt(tf5.getText()));
-        Login.admin.updatePublisherOfBook((Book) storage.editable, tf3.getText());
+        Login.staff.updateNameOfProduct(storage.editable,tf1.getText());
+        Login.staff.updateAuthorOfBook((Book) storage.editable,tf4.getText());
+        Login.staff.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
+        Login.staff.updateDescriptionOfProduct(storage.editable,tf6.getText());
+        Login.staff.updateIBMSOfBook((Book) storage.editable,Integer.parseInt(tf5.getText()));
+        Login.staff.updatePublisherOfBook((Book) storage.editable, tf3.getText());
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Edit successfully");

@@ -173,7 +173,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </TextField>
-                              <Label fx:id="lb7" text="Price" GridPane.rowIndex="6">
+                              <Label fx:id="lb7" text="Import price" GridPane.rowIndex="6">
                                  <font>
                                     <Font size="29.0" />
                                  </font>

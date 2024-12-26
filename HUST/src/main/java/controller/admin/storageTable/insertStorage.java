@@ -148,7 +148,7 @@ public class insertStorage implements Initializable {
             }
             try {
                 Login.admin.addProductToStore(new Book(tf1.getText(), Float.parseFloat(tf2.getText()), tf6.getText(),
-                        tf3.getText(), tf4.getText(), Integer.parseInt(tf5.getText())), 1, Float.parseFloat(tf7.getText()));
+                        tf3.getText(), tf4.getText(), Integer.parseInt(tf5.getText())), Integer.parseInt(tf7.getText()), Float.parseFloat(tf7.getText()));
             } catch (NumberFormatException e){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Invalid Input");
@@ -183,7 +183,7 @@ public class insertStorage implements Initializable {
             }
             try {
                 Login.admin.addProductToStore(new Toy(tf1.getText(),Float.parseFloat(tf2.getText()),tf4.getText(),tf3.getText()),
-                        1,Float.parseFloat(tf5.getText()));
+                Integer.parseInt(tf7.getText()),Float.parseFloat(tf5.getText()));
             } catch (NumberFormatException e){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Invalid Input");
@@ -222,7 +222,7 @@ public class insertStorage implements Initializable {
             try {
                 Login.admin.addProductToStore(new Stationary(
                         tf1.getText(),Float.parseFloat(tf2.getText()),tf5.getText(),tf3.getText(),tf4.getText()),
-                        1,Float.parseFloat(tf6.getText()));
+                        Integer.parseInt(tf7.getText()),Float.parseFloat(tf6.getText()));
             } catch (NumberFormatException e){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Invalid Input");
@@ -247,19 +247,19 @@ public class insertStorage implements Initializable {
 
     public void handleChooseButton(ActionEvent event) throws IOException {
         // Check the selected type
-        if (Objects.equals(typeField.getValue(), "Book")) {
-            // Make fields visible for Book
-            setVisibility(true, true, true, true, true, true, true, true);
-            setLabels("Name", "Price", "Publisher", "Author", "ISBN", "Description", "Import price", "Quantity");
-        } else if (Objects.equals(typeField.getValue(), "Toy")) {
-            // Hide unused fields for Toy
-            setVisibility(true, true, true, true, true, true, false, false);
-            setLabels("Name", "Price", "Brand", "Description", "Import price", "Quantity", "", "");
-        } else if (Objects.equals(typeField.getValue(), "Stationary")) {
-            // Hide unused fields for Stationary
-            setVisibility(true, true, true, true, true, true, true, false);
-            setLabels("Name", "Price", "Brand", "Stationary Type", "Description", "Import price", "Quantity", "");
-        }
+            if (Objects.equals(typeField.getValue(), "Book")) {
+                // Make fields visible for Book
+                setVisibility(true, true, true, true, true, true, true, true);
+                setLabels("Name", "Price", "Publisher", "Author", "ISBN", "Description", "Import price", "Quantity");
+            } else if (Objects.equals(typeField.getValue(), "Toy")) {
+                // Hide unused fields for Toy
+                setVisibility(true, true, true, true, true, true, false, false);
+                setLabels("Name", "Price", "Brand", "Description", "Import price", "Quantity", "", "");
+            } else if (Objects.equals(typeField.getValue(), "Stationary")) {
+                // Hide unused fields for Stationary
+                setVisibility(true, true, true, true, true, true, true, false);
+                setLabels("Name", "Price", "Brand", "Stationary Type", "Description", "Import price", "Quantity", "");
+            }
     }
 
     // Helper method to manage visibility
@@ -315,6 +315,7 @@ public class insertStorage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setVisibility(false, false, false, false, false, false, false, false);
         typeField.getItems().addAll(typeChoice);
     }
 }

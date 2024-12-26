@@ -129,7 +129,7 @@ public class insertStorage implements Initializable {
                 return;
             }
             try {
-                Login.admin.addProductToStore(new Book(tf1.getText(), Float.parseFloat(tf2.getText()), tf6.getText(),
+                Login.staff.addProductToStore(new Book(tf1.getText(), Float.parseFloat(tf2.getText()), tf6.getText(),
                         tf3.getText(), tf4.getText(), Integer.parseInt(tf5.getText())), Integer.parseInt(tf8.getText()),
                         Float.parseFloat(tf7.getText()));
 
@@ -167,7 +167,7 @@ public class insertStorage implements Initializable {
                 return;
             }
             try {
-                Login.admin.addProductToStore(new Toy(tf1.getText(),Float.parseFloat(tf2.getText()),tf4.getText(),tf3.getText()),
+                Login.staff.addProductToStore(new Toy(tf1.getText(),Float.parseFloat(tf2.getText()),tf4.getText(),tf3.getText()),
                         Integer.parseInt(tf6.getText()),Float.parseFloat(tf5.getText()));
             } catch (NumberFormatException e){
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -205,7 +205,7 @@ public class insertStorage implements Initializable {
                 return;
             }
             try {
-                Login.admin.addProductToStore(new Stationary(
+                Login.staff.addProductToStore(new Stationary(
                         tf1.getText(),Float.parseFloat(tf2.getText()),tf5.getText(),tf3.getText(),tf4.getText()),
                         Integer.parseInt(tf7.getText()),Float.parseFloat(tf6.getText()));
             } catch (NumberFormatException e){
@@ -387,6 +387,7 @@ public class insertStorage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setVisibility(false, false, false, false, false, false, false, false);
         typeField.getItems().addAll(typeChoice);
     }
 }

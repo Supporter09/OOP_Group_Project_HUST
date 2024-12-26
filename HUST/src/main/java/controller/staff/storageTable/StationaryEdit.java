@@ -87,11 +87,11 @@ public class StationaryEdit implements Initializable {
             return;
         }
 
-        Login.admin.updateNameOfProduct(storage.editable,tf1.getText());
-        Login.admin.updateTypeOfStationary((Stationary) storage.editable,tf4.getText());
-        Login.admin.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
-        Login.admin.updateBrandOfStationary((Stationary) storage.editable, tf3.getText());
-        Login.admin.updateDescriptionOfProduct(storage.editable, tf5.getText());
+        Login.staff.updateNameOfProduct(storage.editable,tf1.getText());
+        Login.staff.updateTypeOfStationary((Stationary) storage.editable,tf4.getText());
+        Login.staff.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
+        Login.staff.updateBrandOfStationary((Stationary) storage.editable, tf3.getText());
+        Login.staff.updateDescriptionOfProduct(storage.editable, tf5.getText());
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Edit successfully");
