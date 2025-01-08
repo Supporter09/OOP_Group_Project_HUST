@@ -12,8 +12,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Databases.OrderDB;
+import model.Databases.ProductDB;
+import model.Databases.UserDB;
+import model.Users.Customer;
+import model.Users.Staff;
+import model.Users.User;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -23,8 +31,20 @@ public class dashboard implements Initializable {
     public AnchorPane dashHead;
     @FXML
     private Label name;
+    @FXML
+    private Label orderLb;
+
+    @FXML
+    private Label productLb;
+
+    @FXML
+    private Label staffLb;
+
+    @FXML
+    private Label userLb;
 
     public String holder;
+
     Stage dialogStage = new Stage();
     Scene scene;
 
@@ -49,8 +69,24 @@ public class dashboard implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        OrderDB orderDB = new OrderDB();
+        UserDB userDB = new UserDB();
+        ProductDB productDB = new ProductDB();
+        ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Staff> staffs = new ArrayList<>();
         try {
-            name.setText(Login.staff.getUsername());
+            for (User x : userDB.getAllUsers()){
+                if (x instanceof Customer) {
+                    customers.add((Customer) x);
+                } else if (x instanceof Staff) {
+                    staffs.add((Staff) x);
+                }
+            }
+
+            orderLb.setText(String.valueOf(orderDB.size()));
+            staffLb.setText(String.valueOf(staffs.size()));
+            userLb.setText(String.valueOf(customers.size()));
+            productLb.setText(String.valueOf(productDB.size()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

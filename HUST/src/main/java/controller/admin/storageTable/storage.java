@@ -20,11 +20,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import model.Products.Book;
 import model.Products.Product;
 import model.Products.ProductInfo;
 import model.Products.Toy;
 import model.Store.Store;
+import model.Products.Book;
 
 import java.io.IOException;
 import java.net.URL;
@@ -256,6 +256,14 @@ public class storage implements Initializable {
 
         TableView.TableViewSelectionModel<ProductInfo> selectionModel = table.getSelectionModel();
         ObservableList<ProductInfo> selectedItems = selectionModel.getSelectedItems();
+
+        if (selectedItems == null || selectedItems.isEmpty()) {
+            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+            warningAlert.setTitle("No Product Selected");
+            warningAlert.setHeaderText("Please choose a product");
+            warningAlert.showAndWait();
+            return; // Exit the method if no selection
+        }
 
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
 

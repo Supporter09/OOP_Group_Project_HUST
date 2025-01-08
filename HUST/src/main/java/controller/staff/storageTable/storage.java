@@ -20,11 +20,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import model.Products.Book;
 import model.Products.Product;
 import model.Products.ProductInfo;
 import model.Products.Toy;
 import model.Store.Store;
+import model.Products.Book;
 
 import java.io.IOException;
 import java.net.URL;
@@ -153,7 +153,7 @@ public class storage implements Initializable {
                 return;
             }
             try {
-                Login.admin.updateNameOfProduct(productInfo.getProduct(),newName);;
+                Login.staff.updateNameOfProduct(productInfo.getProduct(),newName);;
                 productInfo.getProduct().setName(newName);
 //                productInfo = store.getByProduct(productInfo.getProduct());
                 table.refresh();
@@ -169,7 +169,7 @@ public class storage implements Initializable {
             Double newName = e.getNewValue();
 
             try {
-                Login.admin.updatePriceOfProduct(productInfo.getProduct(),newName);;
+                Login.staff.updatePriceOfProduct(productInfo.getProduct(),newName);;
                 productInfo.getProduct().setPrice(newName);
 //                productInfo = store.getByProduct(productInfo.getProduct());
                 table.refresh();
@@ -185,7 +185,7 @@ public class storage implements Initializable {
             Integer newName = e.getNewValue();
 
             try {
-                Login.admin.updateQuantityOfProduct(productInfo.getProduct(),newName);;
+                Login.staff.updateQuantityOfProduct(productInfo.getProduct(),newName);;
                 productInfo.setQuantity(newName);
 //                productInfo = store.getByProduct(productInfo.getProduct());
                 table.refresh();
@@ -249,7 +249,7 @@ public class storage implements Initializable {
                 // Remove the selected items from the original employeeObservableList
                 for (ProductInfo x : selectedItems) {
                     try {
-                        Login.admin.removeProductFromStore(x.getProduct(), x.getQuantity());
+                        Login.staff.removeProductFromStore(x.getProduct(), x.getQuantity());
                         store.removeProduct(x.getProduct(), x.getQuantity());
                     } catch (Exception e) {
                         throw new RuntimeException(e);

@@ -15,6 +15,7 @@ public class Store {
     private boolean avail;
     private ArrayList<ProductInfo> itemsInStore = new ArrayList<ProductInfo>();
     private boolean DEBUG_MODE;
+    private double fixCost;
 
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
@@ -27,6 +28,7 @@ public class Store {
         this.path = "./src/main/java/app/data/storedb.dat";
         this.avail = false;
         this.DEBUG_MODE = false;
+        this.fixCost = 1000;
         this.init();
     }
 
@@ -35,6 +37,7 @@ public class Store {
         this.path = path;
         this.avail = false;
         this.DEBUG_MODE = false;
+        this.fixCost = 1000;
         this.init();
     }
 
@@ -43,6 +46,7 @@ public class Store {
         this.path = "./storedb.dat";
         this.avail = false;
         this.DEBUG_MODE = DEBUG_MODE;
+        this.fixCost = 1000;
         this.init();
     }
 
@@ -51,6 +55,7 @@ public class Store {
         this.path = path;
         this.avail = false;
         this.DEBUG_MODE = DEBUG_MODE;
+        this.fixCost = 1000;
         this.init();
     }
     public void init()
@@ -96,6 +101,14 @@ public class Store {
             e.printStackTrace();
             this.avail = false;
         }
+    }
+
+    public double getFixCost() {
+        return fixCost;
+    }
+
+    public void setFixCost(double fixCost) {
+        this.fixCost = fixCost;
     }
 
     public ArrayList<ProductInfo> getItemsInStore() throws Exception

@@ -81,10 +81,10 @@ public class ToyEdit implements Initializable {
             return;
         }
 
-        Login.admin.updateNameOfProduct(storage.editable,tf1.getText());
-        Login.admin.updateDescriptionOfProduct(storage.editable,tf4.getText());
-        Login.admin.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
-        Login.admin.updateBrandOfToy((Toy) storage.editable, tf3.getText());
+        Login.staff.updateNameOfProduct(storage.editable,tf1.getText());
+        Login.staff.updateDescriptionOfProduct(storage.editable,tf4.getText());
+        Login.staff.updatePriceOfProduct(storage.editable,Double.parseDouble(tf2.getText()));
+        Login.staff.updateBrandOfToy((Toy) storage.editable, tf3.getText());
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Edit successfully");

@@ -21,11 +21,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Cart.Cart;
 import model.Databases.ProductDB;
-import model.Products.Book;
 import model.Products.ProductInfo;
 import model.Products.Stationary;
 import model.Products.Toy;
 import model.Store.Store;
+import model.Products.Book;
 
 import java.io.IOException;
 import java.net.URL;

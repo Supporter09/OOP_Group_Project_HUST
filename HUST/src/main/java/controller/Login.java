@@ -19,7 +19,7 @@ import model.Users.User;
 
 import java.io.IOException;
 
-public class    Login {
+public class Login {
     @FXML
     TextField usernameField;
     @FXML
@@ -51,20 +51,23 @@ public class    Login {
 
                 switch (user) {
                     case Admin admin1 -> {
+                        System.out.println("admin");
                         admin = admin1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/admin/dashboard.fxml"));
                         Parent root = fxmlLoader.load();
 
                         controller.admin.dashboard controller = fxmlLoader.getController();
-                        controller.sendName(admin.getUsername());
+
 
                         dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         dialogStage.setScene(scene);
                         dialogStage.show();
+                        //break;
                     }
 
                     case Staff staff1 -> {
+                        System.out.println("staff");
                         staff = staff1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/staff/dashboard.fxml"));
                         Parent root = fxmlLoader.load();
@@ -76,9 +79,11 @@ public class    Login {
                         scene = new Scene(root);
                         dialogStage.setScene(scene);
                         dialogStage.show();
+                        //break;
                     }
 
                     case Customer customer1 -> {
+                        System.out.println("customer");
                         customer = customer1;
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller/user/Dashboard.fxml"));
                         Parent root = fxmlLoader.load();
@@ -86,6 +91,7 @@ public class    Login {
                         scene = new Scene(root);
                         dialogStage.setScene(scene);
                         dialogStage.show();
+                        //break;
                     }
                     case null, default -> {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

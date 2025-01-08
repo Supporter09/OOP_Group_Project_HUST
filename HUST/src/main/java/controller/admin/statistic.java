@@ -20,6 +20,7 @@ import model.Products.Product;
 import model.Products.ProductInfo;
 import model.Products.ReceiveProductInfo;
 import model.Report.Report;
+import model.Store.Store;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,7 @@ import java.util.ResourceBundle;
 public class statistic implements Initializable {
     Stage dialogStage = new Stage();
     Scene scene;
+    private static Store store = new Store();
     @FXML
     private ChoiceBox<String> fromMonth;
 
@@ -98,6 +100,9 @@ public class statistic implements Initializable {
     @FXML
     private TableView<ProductInfo> tableOut;
 
+    @FXML
+    private TextField fixedCostTf;
+
     private String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
     private String[] year = {"2023","2024"};
     private String[] date = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15",
@@ -147,6 +152,7 @@ public class statistic implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fixedCostTf.setText(String.valueOf(store.getFixCost()));
         fromMonth.getItems().addAll(month);
         toMonth.getItems().addAll(month);
         fromYear.getItems().addAll(year);
@@ -156,6 +162,8 @@ public class statistic implements Initializable {
     }
 
     public void handleExtractButton(ActionEvent event) throws Exception {
+        tableIn.getItems().clear();
+        tableOut.getItems().clear();
         try{
             YearMonth startYearMonth = YearMonth.of(
                     Integer.parseInt(fromYear.getValue()),
@@ -176,10 +184,11 @@ public class statistic implements Initializable {
             Report report = new Report(startDate, endDate);
 
             // Update the labels with the values from the report
-            expenseLabel.setText(report.getCosts() +"$");
+            expenseLabel.setText((report.getCosts() + Double.parseDouble(fixedCostTf.getText())) +"$");
             revenueLable.setText(report.getRevenue() +"$");
-            profitLable.setText(report.getProfit() +"$");
+            profitLable.setText((report.getProfit() - Double.parseDouble(fixedCostTf.getText())) +"$");
 
+            store.setFixCost(Double.parseDouble(fixedCostTf.getText()));
 
             ReceiveProductInfo r = null;
             try {
